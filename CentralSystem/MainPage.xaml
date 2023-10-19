@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:CentralSystem.Views"
+       xmlns:helpers="clr-namespace:CentralSystem.Helpers"
+       x:Class="CentralSystem.MainPage"
+       FlyoutBehavior="Locked"
+       Title="CentralSystem">
+    <ShellContent Title="Início"
+                  ContentTemplate="{DataTemplate views:Home}">
+        <ShellContent.Icon>
+            <FontImageSource FontFamily="FAS" 
+                             Glyph="{x:Static helpers:FontAwesomeHelper.House}" 
+                             Size="50"
+                             Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+        </ShellContent.Icon>
+        
+    </ShellContent>
+
+    <ShellContent Title="Funcionários"
+              ContentTemplate="{DataTemplate views:Users}">
+        <ShellContent.Icon>
+            <FontImageSource FontFamily="FAS" 
+                         Glyph="{x:Static helpers:FontAwesomeHelper.PeopleGroup}" 
+                         Size="50"
+                         Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+        </ShellContent.Icon>
+
+        <ShellContent Title="Adicionar Funcionário" Route="add" ContentTemplate="{DataTemplate views:EditUser}">
+            
+        </ShellContent>
+    </ShellContent>
+</Shell>
