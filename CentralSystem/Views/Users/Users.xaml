@@ -6,10 +6,10 @@
              xmlns:models="clr-namespace:CentralSystem.Models"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="CentralSystem.Views.Users"
-             x:DataType="vm:UsersViewModel"
+             x:DataType="vm:UserViewModel"
              Title="Funcionários">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding AddUserCommand}">
+        <ToolbarItem Command="{Binding AddCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="FAS" 
                                  Glyph="{x:Static helpers:FontAwesomeHelper.Plus}" 
@@ -18,7 +18,7 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ScrollView>
-        <CollectionView ItemsSource="{Binding Users}">
+        <CollectionView ItemsSource="{Binding Items}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"/>
             </CollectionView.ItemsLayout>
@@ -48,7 +48,7 @@
                                HorizontalOptions="End"
                                Source="{FontImageSource Glyph={x:Static helpers:FontAwesomeHelper.Pencil}, FontFamily=FAS, Size=50, Color={StaticResource Primary}}">
                             <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding EditUserCommand, Source={RelativeSource AncestorType={x:Type vm:UsersViewModel}}}"
+                                <TapGestureRecognizer Command="{Binding EditCommand, Source={RelativeSource AncestorType={x:Type vm:UserViewModel}}}"
                                                       CommandParameter="{Binding Id}"/>
                             </Image.GestureRecognizers>
                         </Image>
@@ -57,7 +57,7 @@
                                HorizontalOptions="End"
                                Source="{FontImageSource Glyph={x:Static helpers:FontAwesomeHelper.TrashCan}, FontFamily=FAS, Size=50, Color={StaticResource Red}}">
                             <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding DeleteUserCommand, Source={RelativeSource AncestorType={x:Type vm:UsersViewModel}}}" 
+                                <TapGestureRecognizer Command="{Binding DeleteCommand, Source={RelativeSource AncestorType={x:Type vm:UserViewModel}}}" 
                                                       CommandParameter="{Binding Id}"/>
                             </Image.GestureRecognizers>
                         </Image>
@@ -66,7 +66,7 @@
             </CollectionView.ItemTemplate>
 
             <CollectionView.Behaviors>
-                <toolkit:EventToCommandBehavior EventName="Loaded" Command="{Binding GetUsersCommand}"/>
+                <toolkit:EventToCommandBehavior EventName="Loaded" Command="{Binding GetCommand}"/>
             </CollectionView.Behaviors>
         </CollectionView>
     </ScrollView>

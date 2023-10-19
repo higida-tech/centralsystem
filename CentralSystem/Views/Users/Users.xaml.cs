@@ -4,7 +4,7 @@ namespace CentralSystem.Views;
 
 public partial class Users : ContentPage
 {
-	public Users(UsersViewModel vm)
+	public Users(UserViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;
