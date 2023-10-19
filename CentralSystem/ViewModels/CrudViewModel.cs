@@ -25,9 +25,10 @@ namespace CentralSystem.ViewModels
         {
             var dict = new Dictionary<string, object>
             {
-                { tname, Items }
+                [$"{tname}s"] = Items
             };
-            await Shell.Current.GoToAsync($"edit{tname}", dict);
+
+            await Shell.Current.GoToAsync("edit", dict);
         }
 
         [RelayCommand]
@@ -50,10 +51,10 @@ namespace CentralSystem.ViewModels
             var item = Items.Where(u => u.Id == id).FirstOrDefault().Clone() as T;
             var dict = new Dictionary<string, object>
             {
-                { tname, item },
-                { $"{tname}s", Items }
+                [tname] = item,
+                [$"{tname}s"] = Items
             };
-            await Shell.Current.GoToAsync($"edit{tname}", dict);
+            await Shell.Current.GoToAsync("edit", dict);
         }
     }
 
