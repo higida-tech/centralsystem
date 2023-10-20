@@ -18,16 +18,31 @@
     </ShellContent>
 
     <ShellContent Title="Funcionários"
-              ContentTemplate="{DataTemplate views:Users}">
+                  ContentTemplate="{DataTemplate views:Users}"
+                  Route="users">
         <ShellContent.Icon>
             <FontImageSource FontFamily="FAS" 
-                         Glyph="{x:Static helpers:FontAwesomeHelper.PeopleGroup}" 
+                         Glyph="{x:Static helpers:FontAwesomeHelper.UsersRectangle}" 
                          Size="50"
                          Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
         </ShellContent.Icon>
 
-        <ShellContent Title="Adicionar Funcionário" Route="add" ContentTemplate="{DataTemplate views:EditUser}">
-            
-        </ShellContent>
+        
+
+
+    </ShellContent>
+
+    <ShellContent Title="Clientes"
+                  ContentTemplate="{DataTemplate views:Customers}"
+                  Route="customers">
+        <ShellContent.Icon>
+            <FontImageSource FontFamily="FAS" 
+                     Glyph="{x:Static helpers:FontAwesomeHelper.PeopleGroup}"
+                     Size="50"
+                     Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+        </ShellContent.Icon>
+
+        
+
     </ShellContent>
 </Shell>
