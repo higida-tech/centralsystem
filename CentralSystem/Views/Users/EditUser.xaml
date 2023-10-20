@@ -2,22 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:vm="clr-namespace:CentralSystem.ViewModels"
+             xmlns:vm="clr-namespace:CentralSystem.ViewModels"             
              x:Class="CentralSystem.Views.EditUser"
-             x:DataType="vm:EditUserViewModel">
+             x:DataType="vm:EditUserViewModel"
+             >
     <ScrollView>
         <VerticalStackLayout Spacing="10">
-            <Label Text="{Binding Title}" HorizontalOptions="Center" FontSize="Header" FontAttributes="Bold"/>
             <VerticalStackLayout Spacing="2">
                 <Label Text="Nome"/>
-                <Entry Text="{Binding User.Name}">
+                <Entry Text="{Binding Item.Name}" x:Name="Name">
                     <Entry.Behaviors>
-                        <toolkit:CharactersValidationBehavior MinimumLength="3" Flags="ValidateOnValueChanged" IsValid="{Binding NameIsValid}"/>
+                        <toolkit:CharactersValidationBehavior x:Name="NameValidation"
+                                                              MinimumLength="3"
+                                                              Flags="ValidateOnValueChanged"/>
                     </Entry.Behaviors>
                 </Entry>
                 <Label TextColor="PaleGoldenrod">
                     <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding NameIsValid}" Value="False">
+                        <DataTrigger TargetType="Label" 
+                                     Binding="{Binding IsValid, Source={x:Reference NameValidation}}" 
+                                     Value="False">
                             <Setter Property="Text" Value="Nome inválido."/>
                         </DataTrigger>
                     </Label.Triggers>
@@ -26,14 +30,17 @@
 
             <VerticalStackLayout Spacing="2">
                 <Label Text="Email"/>
-                <Entry Text="{Binding User.Email}">
+                <Entry Text="{Binding Item.Email}" x:Name="Email">
                     <Entry.Behaviors>
-                        <toolkit:EmailValidationBehavior x:Name="EmailValidation" IsValid="{Binding EmailIsValid}" Flags="ValidateOnValueChanged"/>
+                        <toolkit:EmailValidationBehavior x:Name="EmailValidation"
+                                                         Flags="ValidateOnValueChanged"/>
                     </Entry.Behaviors>
                 </Entry>
                 <Label TextColor="PaleGoldenrod">
                     <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding EmailIsValid}" Value="False">
+                        <DataTrigger TargetType="Label" 
+                                     Binding="{Binding IsValid, Source={x:Reference EmailValidation}}" 
+                                     Value="False">
                             <Setter Property="Text" Value="Email inválido."/>
                         </DataTrigger>
                     </Label.Triggers>
@@ -42,15 +49,19 @@
 
             <VerticalStackLayout Spacing="2">
                 <Label Text="Telefone"/>
-                <Entry Text="{Binding User.Phone}">
+                <Entry Text="{Binding Item.Phone}" x:Name="Phone">
                     <Entry.Behaviors>
                         <toolkit:MaskedBehavior Mask="(XX) XXXXX-XXXX"/>
-                        <toolkit:CharactersValidationBehavior MinimumLength="15" IsValid="{Binding PhoneIsValid}" Flags="ValidateOnValueChanged"/>
+                        <toolkit:CharactersValidationBehavior x:Name="PhoneValidation"
+                                                              MinimumLength="15" 
+                                                              Flags="ValidateOnValueChanged" />
                     </Entry.Behaviors>
                 </Entry>
                 <Label TextColor="PaleGoldenrod">
                     <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding PhoneIsValid}" Value="False">
+                        <DataTrigger TargetType="Label" 
+                                     Binding="{Binding IsValid, Source={x:Reference PhoneValidation}}" 
+                                     Value="False">
                             <Setter Property="Text" Value="Telefone inválido."/>
                         </DataTrigger>
                     </Label.Triggers>
@@ -65,14 +76,24 @@
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                
+
                 <Button Grid.Column="0" 
                         Text="Cancelar" 
                         Command="{Binding CancelCommand}"/>
                 <Button Grid.Column="1" 
                         Text="Salvar" 
-                        Command="{Binding SaveCommand}" 
-                        IsEnabled="{Binding FormIsValid}"/>
+                        Command="{Binding SaveCommand}">
+                    <Button.IsEnabled>
+                        <MultiBinding ConverterParameter="CustomAnd(x, y, z, [3], [4], [5])" Converter="{StaticResource Math}">
+                            <Binding Path="IsValid" Source="{x:Reference NameValidation}"/>
+                            <Binding Path="IsValid" Source="{x:Reference EmailValidation}"/>
+                            <Binding Path="IsValid" Source="{x:Reference PhoneValidation}"/>
+                            <Binding Path="Text" Source="{x:Reference Name}" Converter="{StaticResource Math}"/>
+                            <Binding Path="Text" Source="{x:Reference Email}" Converter="{StaticResource Math}"/>
+                            <Binding Path="Text" Source="{x:Reference Phone}" Converter="{StaticResource Math}"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
             </Grid>
         </VerticalStackLayout>
     </ScrollView>
