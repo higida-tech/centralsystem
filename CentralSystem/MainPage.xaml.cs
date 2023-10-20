@@ -6,7 +6,8 @@ public partial class MainPage : Shell
 	public MainPage()
 	{
         InitializeComponent();
-        Routing.RegisterRoute("editUser", typeof(EditUser));
+        Routing.RegisterRoute("users/edit", typeof(EditUser));
+        Routing.RegisterRoute("customers/edit", typeof(EditCustomer));
     }
 }
 

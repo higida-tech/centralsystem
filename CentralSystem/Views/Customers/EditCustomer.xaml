@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:CentralSystem.ViewModels"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:vm="clr-namespace:CentralSystem.ViewModels"             
-             x:Class="CentralSystem.Views.EditUser"
-             x:DataType="vm:EditUserViewModel"
-             >
+             x:Class="CentralSystem.Views.EditCustomer"
+             x:DataType="vm:EditCustomerViewModel">
     <ScrollView>
         <VerticalStackLayout Spacing="10">
             <VerticalStackLayout Spacing="2">
@@ -13,15 +12,15 @@
                 <Entry Text="{Binding Item.Name}" x:Name="Name">
                     <Entry.Behaviors>
                         <toolkit:CharactersValidationBehavior x:Name="NameValidation"
-                                                              MinimumLength="3"
-                                                              Flags="ValidateOnValueChanged"/>
+                                                          MinimumLength="3"
+                                                          Flags="ValidateOnValueChanged"/>
                     </Entry.Behaviors>
                 </Entry>
                 <Label TextColor="PaleGoldenrod">
                     <Label.Triggers>
                         <DataTrigger TargetType="Label" 
-                                     Binding="{Binding IsValid, Source={x:Reference NameValidation}}" 
-                                     Value="False">
+                                 Binding="{Binding IsValid, Source={x:Reference NameValidation}}" 
+                                 Value="False">
                             <Setter Property="Text" Value="Nome inválido."/>
                         </DataTrigger>
                     </Label.Triggers>
@@ -33,14 +32,14 @@
                 <Entry Text="{Binding Item.Email}" x:Name="Email">
                     <Entry.Behaviors>
                         <toolkit:EmailValidationBehavior x:Name="EmailValidation"
-                                                         Flags="ValidateOnValueChanged"/>
+                                                     Flags="ValidateOnValueChanged"/>
                     </Entry.Behaviors>
                 </Entry>
                 <Label TextColor="PaleGoldenrod">
                     <Label.Triggers>
                         <DataTrigger TargetType="Label" 
-                                     Binding="{Binding IsValid, Source={x:Reference EmailValidation}}" 
-                                     Value="False">
+                                 Binding="{Binding IsValid, Source={x:Reference EmailValidation}}" 
+                                 Value="False">
                             <Setter Property="Text" Value="Email inválido."/>
                         </DataTrigger>
                     </Label.Triggers>
@@ -53,15 +52,15 @@
                     <Entry.Behaviors>
                         <toolkit:MaskedBehavior Mask="(XX) XXXXX-XXXX"/>
                         <toolkit:CharactersValidationBehavior x:Name="PhoneValidation"
-                                                              MinimumLength="15" 
-                                                              Flags="ValidateOnValueChanged" />
+                                                          MinimumLength="15" 
+                                                          Flags="ValidateOnValueChanged" />
                     </Entry.Behaviors>
                 </Entry>
                 <Label TextColor="PaleGoldenrod">
                     <Label.Triggers>
                         <DataTrigger TargetType="Label" 
-                                     Binding="{Binding IsValid, Source={x:Reference PhoneValidation}}" 
-                                     Value="False">
+                                 Binding="{Binding IsValid, Source={x:Reference PhoneValidation}}" 
+                                 Value="False">
                             <Setter Property="Text" Value="Telefone inválido."/>
                         </DataTrigger>
                     </Label.Triggers>
@@ -78,11 +77,11 @@
                 </Grid.RowDefinitions>
 
                 <Button Grid.Column="0" 
-                        Text="Cancelar" 
-                        Command="{Binding CancelCommand}"/>
+                    Text="Cancelar" 
+                    Command="{Binding CancelCommand}"/>
                 <Button Grid.Column="1" 
-                        Text="Salvar" 
-                        Command="{Binding SaveCommand}">
+                    Text="Salvar" 
+                    Command="{Binding SaveCommand}">
                     <Button.IsEnabled>
                         <MultiBinding ConverterParameter="CustomAnd(x, y, z, [3], [4], [5])" Converter="{StaticResource Math}">
                             <Binding Path="IsValid" Source="{x:Reference NameValidation}"/>

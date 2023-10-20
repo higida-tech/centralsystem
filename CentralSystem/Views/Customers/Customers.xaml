@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:DataType="vm:CustomerViewModel"
+             x:Class="CentralSystem.Views.Customers"
              xmlns:helpers="clr-namespace:CentralSystem.Helpers"
              xmlns:vm="clr-namespace:CentralSystem.ViewModels"
              xmlns:models="clr-namespace:CentralSystem.Models"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="CentralSystem.Views.Users"
-             x:DataType="vm:UserViewModel"
-             Title="Funcionários">
+             Title="Clientes">
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding AddCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="FAS" 
-                                 Glyph="{x:Static helpers:FontAwesomeHelper.Plus}" 
-                                 Size="50"/>
+                             Glyph="{x:Static helpers:FontAwesomeHelper.Plus}" 
+                             Size="50"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -24,14 +24,14 @@
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:User">
+                <DataTemplate x:DataType="models:Customer">
                     <Grid RowDefinitions="*,*" ColumnDefinitions="1*,4*, 1*" RowSpacing="8">
 
                         <Border Grid.RowSpan="2" Style="{StaticResource pill}" HorizontalOptions="Start">
                             <Label Text="{Binding Id}" 
-                                   VerticalOptions="Center" 
-                                   HorizontalOptions="Center" 
-                                   TextColor="{StaticResource Black}"/>
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center" 
+                               TextColor="{StaticResource Black}"/>
                         </Border>
 
                         <VerticalStackLayout Grid.Column="1" Spacing="4">
@@ -45,11 +45,11 @@
                         </HorizontalStackLayout>
 
                         <Image WidthRequest="20" Grid.Column="2"
-                               HorizontalOptions="End"
-                               Source="{FontImageSource Glyph={x:Static helpers:FontAwesomeHelper.Pencil}, FontFamily=FAS, Size=50, Color={StaticResource Primary}}">
+                           HorizontalOptions="End"
+                           Source="{FontImageSource Glyph={x:Static helpers:FontAwesomeHelper.Pencil}, FontFamily=FAS, Size=50, Color={StaticResource Primary}}">
                             <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding EditCommand, Source={RelativeSource AncestorType={x:Type vm:UserViewModel}}}"
-                                                      CommandParameter="{Binding Id}"/>
+                                <TapGestureRecognizer Command="{Binding EditCommand, Source={RelativeSource AncestorType={x:Type vm:CustomerViewModel}}}"
+                                                  CommandParameter="{Binding Id}"/>
                             </Image.GestureRecognizers>
                         </Image>
 
@@ -57,7 +57,7 @@
                                HorizontalOptions="End"
                                Source="{FontImageSource Glyph={x:Static helpers:FontAwesomeHelper.TrashCan}, FontFamily=FAS, Size=50, Color={StaticResource Red}}">
                             <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding DeleteCommand, Source={RelativeSource AncestorType={x:Type vm:UserViewModel}}}" 
+                                <TapGestureRecognizer Command="{Binding DeleteCommand, Source={RelativeSource AncestorType={x:Type vm:CustomerViewModel}}}" 
                                                       CommandParameter="{Binding Id}"/>
                             </Image.GestureRecognizers>
                         </Image>

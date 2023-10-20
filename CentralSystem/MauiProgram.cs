@@ -25,12 +25,19 @@ public static class MauiProgram
             });
 
         builder.Services.AddTransient<Users>();
-        builder.Services.AddTransient<UsersViewModel>();
+        builder.Services.AddTransient<UserViewModel>();
 
         builder.Services.AddTransient<EditUser>();
         builder.Services.AddTransient<EditUserViewModel>();
 
-		builder.Services.AddTransient<LocalDatabase<User>>();
+        builder.Services.AddTransient<Customers>();
+        builder.Services.AddTransient<CustomerViewModel>();
+
+        builder.Services.AddTransient<EditCustomer>();
+        builder.Services.AddTransient<EditCustomerViewModel>();
+
+        builder.Services.AddTransient<LocalDatabase<User>>();
+        builder.Services.AddTransient<LocalDatabase<Customer>>();
 
 #if DEBUG
         builder.Logging.AddDebug();

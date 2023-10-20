@@ -2,9 +2,9 @@ using CentralSystem.ViewModels;
 
 namespace CentralSystem.Views;
 
-public partial class Users : ContentPage
+public partial class EditCustomer : ContentPage
 {
-	public Users(UserViewModel vm)
+	public EditCustomer(EditCustomerViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;
