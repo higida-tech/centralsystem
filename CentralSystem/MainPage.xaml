@@ -37,4 +37,26 @@
                      Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
         </ShellContent.Icon>
     </ShellContent>
+
+    <!--<ShellContent Title="Estoque"
+      ContentTemplate="{DataTemplate views:Customers}"
+      Route="stocks">
+        <ShellContent.Icon>
+            <FontImageSource FontFamily="FAS" 
+         Glyph="{x:Static helpers:FontAwesomeHelper.Dolly}"
+         Size="50"
+         Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+        </ShellContent.Icon>
+    </ShellContent>-->
+
+    <ShellContent Title="Produtos"
+          ContentTemplate="{DataTemplate views:Products}"
+          Route="products">
+        <ShellContent.Icon>
+            <FontImageSource FontFamily="FAS" 
+             Glyph="{x:Static helpers:FontAwesomeHelper.Flask}"
+             Size="50"
+             Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+        </ShellContent.Icon>
+    </ShellContent>
 </Shell>

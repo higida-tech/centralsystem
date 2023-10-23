@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Maui.Behaviors;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace CentralSystem.Converters

@@ -71,4 +71,9 @@ namespace CentralSystem.ViewModels
     {
         public EditCustomerViewModel(LocalDatabase<Customer> database) : base(database) { }
     }
+
+    public sealed class EditProductViewModel : EditViewModel<Product>
+    {
+        public EditProductViewModel(LocalDatabase<Product> database) : base(database) { }
+    }
 }

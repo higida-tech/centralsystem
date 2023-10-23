@@ -19,6 +19,12 @@
     <MauiXaml Update="Views\Home.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Views\Products\EditProduct.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\Products\Products.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Views\Users\EditUser.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

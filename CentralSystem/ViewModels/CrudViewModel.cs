@@ -67,4 +67,9 @@ namespace CentralSystem.ViewModels
     {
         public CustomerViewModel(LocalDatabase<Customer> database) : base(database) { }
     }
+
+    public sealed class ProductViewModel : CrudViewModel<Product>
+    {
+        public ProductViewModel(LocalDatabase<Product> database) : base(database) { }
+    }
 }

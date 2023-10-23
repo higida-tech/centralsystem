@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:CentralSystem.ViewModels"             
+             x:DataType="vm:EditProductViewModel"
+             x:Class="CentralSystem.Views.EditProduct"
+             Title="EditProduct">
+    <ScrollView>
+        <VerticalStackLayout Spacing="10">
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Nome"/>
+                <Entry Text="{Binding Item.Name}" x:Name="Name">
+                    <Entry.Behaviors>
+                        <toolkit:CharactersValidationBehavior x:Name="NameValidation"
+                                                          MinimumLength="3"
+                                                          Flags="ValidateOnValueChanged"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Label TextColor="PaleGoldenrod">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" 
+                                 Binding="{Binding IsValid, Source={x:Reference NameValidation}}" 
+                                 Value="False">
+                            <Setter Property="Text" Value="Nome inválido."/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Descrição"/>
+                <Editor Text="{Binding Item.Description}"/>
+            </VerticalStackLayout>
+
+            <Grid ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Column="0" 
+                    Text="Cancelar" 
+                    Command="{Binding CancelCommand}"/>
+                <Button Grid.Column="1" 
+                    Text="Salvar" 
+                    Command="{Binding SaveCommand}">
+                    <Button.IsEnabled>
+                        <MultiBinding ConverterParameter="CustomAnd([0], [1])" Converter="{StaticResource Math}">
+                            <Binding Path="IsValid" Source="{x:Reference NameValidation}"/>
+                            <Binding Path="Text" Source="{x:Reference Name}" Converter="{StaticResource Math}"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

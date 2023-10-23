@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:CentralSystem.Helpers"
+             xmlns:vm="clr-namespace:CentralSystem.ViewModels"
+             xmlns:models="clr-namespace:CentralSystem.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:converters="clr-namespace:CentralSystem.Converters"
+             x:DataType="vm:ProductViewModel"
+             x:Class="CentralSystem.Views.Products"
+             Title="Products">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding AddCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FAS" 
+                             Glyph="{x:Static helpers:FontAwesomeHelper.Plus}" 
+                             Size="50"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <CollectionView ItemsSource="{Binding Items}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Product">
+                    <Grid RowDefinitions="*,*" ColumnDefinitions="1*,4*, 1*" RowSpacing="8">
+
+                        <Border Grid.RowSpan="2" Style="{StaticResource pill}" HorizontalOptions="Start">
+                            <Label Text="{Binding Id}" 
+                                   VerticalOptions="Center" 
+                                   HorizontalOptions="Center" 
+                                   TextColor="{StaticResource Black}"/>
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="{Binding Name}" FontSize="Small"/>
+                            <BoxView BackgroundColor="White" HeightRequest="1"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" Grid.Row="1">
+                            <Label Text="{Binding Description, Converter={converters:StringLimitConverter}, ConverterParameter='250'}"/>
+                        </VerticalStackLayout>
+
+                        <Image WidthRequest="20" Grid.Column="2"
+                           HorizontalOptions="End"
+                           Source="{FontImageSource Glyph={x:Static helpers:FontAwesomeHelper.Pencil}, FontFamily=FAS, Size=50, Color={StaticResource Primary}}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EditCommand, Source={RelativeSource AncestorType={x:Type vm:ProductViewModel}}}"
+                                                  CommandParameter="{Binding Id}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image WidthRequest="20" Grid.Column="2" Grid.Row="1"
+                           HorizontalOptions="End"
+                           Source="{FontImageSource Glyph={x:Static helpers:FontAwesomeHelper.TrashCan}, FontFamily=FAS, Size=50, Color={StaticResource Red}}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding DeleteCommand, Source={RelativeSource AncestorType={x:Type vm:ProductViewModel}}}" 
+                                                  CommandParameter="{Binding Id}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="Loaded" Command="{Binding GetCommand}"/>
+            </CollectionView.Behaviors>
+        </CollectionView>
+    </ScrollView>
+</ContentPage>

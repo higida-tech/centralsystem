@@ -24,20 +24,27 @@ public static class MauiProgram
                 fonts.AddFont("FA-Free-Solid-900.otf", "FAS");
             });
 
+        /* Users */
         builder.Services.AddTransient<Users>();
         builder.Services.AddTransient<UserViewModel>();
-
         builder.Services.AddTransient<EditUser>();
         builder.Services.AddTransient<EditUserViewModel>();
 
+        /* Customers */
         builder.Services.AddTransient<Customers>();
         builder.Services.AddTransient<CustomerViewModel>();
-
         builder.Services.AddTransient<EditCustomer>();
         builder.Services.AddTransient<EditCustomerViewModel>();
 
+        /* Products */
+        builder.Services.AddTransient<Products>();
+        builder.Services.AddTransient<ProductViewModel>();
+        builder.Services.AddTransient<EditProduct>();
+        builder.Services.AddTransient<EditProductViewModel>();
+
         builder.Services.AddTransient<LocalDatabase<User>>();
         builder.Services.AddTransient<LocalDatabase<Customer>>();
+        builder.Services.AddTransient<LocalDatabase<Product>>();
 
 #if DEBUG
         builder.Logging.AddDebug();
