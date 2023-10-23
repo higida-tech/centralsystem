@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:CentralSystem.ViewModels"
              xmlns:models="clr-namespace:CentralSystem.Models"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:converters="clr-namespace:CentralSystem.Converters"
              x:Class="CentralSystem.Views.Users"
              x:DataType="vm:UserViewModel"
              Title="Funcionários">
@@ -41,7 +42,9 @@
 
                         <HorizontalStackLayout Spacing="10" Grid.Column="1" Grid.Row="1">
                             <Label Text="{Binding Email}"/>
-                            <Label Text="{Binding Phone}"/>
+                            <Label Text="{Binding Phone, Converter={converters:StringToPhoneConverter}}"/>
+
+
                         </HorizontalStackLayout>
 
                         <Image WidthRequest="20" Grid.Column="2"
