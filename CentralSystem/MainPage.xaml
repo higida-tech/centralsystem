@@ -14,7 +14,6 @@
                              Size="50"
                              Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
         </ShellContent.Icon>
-        
     </ShellContent>
 
     <ShellContent Title="Funcionários"
@@ -26,10 +25,6 @@
                          Size="50"
                          Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
         </ShellContent.Icon>
-
-        
-
-
     </ShellContent>
 
     <ShellContent Title="Clientes"
@@ -41,8 +36,5 @@
                      Size="50"
                      Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
         </ShellContent.Icon>
-
-        
-
     </ShellContent>
 </Shell>
